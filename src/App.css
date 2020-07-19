@@ -1,0 +1,9 @@
+.form-control {
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 10px; 
+}
+
+.control-error {
+  border: 1px solid red;
+}
