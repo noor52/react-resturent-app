@@ -1,4 +1,5 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 // import logo from "./logo.svg";
 // import "./App.css";
 // import Navbar from "./Navbar";
@@ -16,28 +17,52 @@ import React from "react";
 // import Try from "./Emis/Try";
 // import Prectise from "./Emis/Prectise";
 // import AllTypeInput from './Components/AllTypeInput'
+
+// function App() {
+//   return (
+//     <div>
+//       {/* <Navbar /> */}
+//       {/* <User /> */}
+//       {/* <Form /> */}
+//       {/* <Name /> */}
+//       {/* {<MyForm1 />}*/}
+//       {/* {<TestMatch />} */}
+//       {/* {<AllTypeInput />} */}
+//       {/* {<FormComponent />} */}
+//       {/* {<FormContainer />} */}
+//       {/* {<FormComponent2 />} */}
+//       {/* {<Gone />} */}
+//       {/* {<Try />} */}
+//       {/* {<Prectise />} */}
+
+//       {<Menu />}
+//     </div>
+//   );
+// }
+
+import { DISHES } from "./shared/dishes";
+import { Navbar, NavbarBrand } from "reactstrap";
 import Menu from "./Menu";
 
-function App() {
-  return (
-    <div>
-      {/* <Navbar /> */}
-      {/* <User /> */}
-      {/* <Form /> */}
-      {/* <Name /> */}
-      {/* {<MyForm1 />}*/}
-      {/* {<TestMatch />} */}
-      {/* {<AllTypeInput />} */}
-      {/* {<FormComponent />} */}
-      {/* {<FormContainer />} */}
-      {/* {<FormComponent2 />} */}
-      {/* {<Gone />} */}
-      {/* {<Try />} */}
-      {/* {<Prectise />} */}
-
-      {<Menu />}
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dishes: DISHES,
+    };
+  }
+  render() {
+    return (
+      <div className="App">
+        <Navbar dark color="primary">
+          <div className="container">
+            <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
+          </div>
+        </Navbar>
+        {<Menu dishes={this.state.dishes} />}
+      </div>
+    );
+  }
 }
 
 export default App;
