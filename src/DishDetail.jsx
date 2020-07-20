@@ -16,33 +16,47 @@ class DishDetail extends Component {
 
     this.state = {
       selectedDishComment: null,
+      selectedDish: null,
     };
   }
 
   onDishSelect(dish) {
-    this.setState({ selectedDishComment: dish });
+    this.setState({ selectedDishComment: dish, selectedDish: dish });
+  }
+
+  renderComment(dish) {
+    if (dish != null) {
+      return (
+        <Card>
+          <CardBody>
+            <CardTitle Style="text-align: left">Comments</CardTitle>
+
+            {this.props.dishes.map((dish, index) => (
+              <CardText key={index}>
+                <p> {dish.comments[index].comment}</p>
+
+                <p>
+                  --
+                  {dish.comments[index].author} ,{dish.comments[index].date}
+                </p>
+              </CardText>
+            ))}
+          </CardBody>
+        </Card>
+      );
+    } else return <div></div>;
   }
 
   renderDish(dish) {
     if (dish != null) {
       return (
-        <div className="App">
-          <Card>
-            <CardTitle Style="text-align: left">Comments</CardTitle>
-            <CardBody>
-              {this.props.dishes.map((dish, index) => (
-                <CardText key={index}>
-                  <p> {dish.comments[index].comment}</p>
-
-                  <p>
-                    --
-                    {dish.comments[index].author} ,{dish.comments[index].date}
-                  </p>
-                </CardText>
-              ))}
-            </CardBody>
-          </Card>
-        </div>
+        <Card>
+          <CardImg top src={dish.image} alt={dish.name} />
+          <CardBody>
+            <CardTitle>{dish.name}</CardTitle>
+            <CardText>{dish.description}</CardText>
+          </CardBody>
+        </Card>
       );
     } else {
       return <div></div>;
@@ -67,11 +81,22 @@ class DishDetail extends Component {
       <div className="container">
         <div className="row">{menu}</div>
         <div className="row">
+          <div className="col-6 col-md-5 m-1">
+            {this.renderDish(this.state.selectedDish)}
+          </div>
           <div className="col-12 col-md-5 m-1">
-            {this.renderDish(this.state.selectedDishComment)}
+            {this.renderComment(this.state.selectedDishComment)}
           </div>
         </div>
       </div>
+      // <div className="container">
+      //   <div className="row">{menu}</div>
+      // <div className="row">
+      // <div className="col-6 col-md-5 m-1">
+      //   {this.renderDish(this.state.selectedDishComment)}
+      // </div>
+      // </div>
+      // </div>
     );
   }
 }
