@@ -4,9 +4,10 @@ import {
   Card,
   CardImg,
   CardImgOverlay,
-  CardText,
+  // CardText,
   CardBody,
   CardTitle,
+  CardText,
 } from "reactstrap";
 
 class DishDetail extends Component {
@@ -23,23 +24,29 @@ class DishDetail extends Component {
   }
 
   renderDish(dish) {
-    if (dish != null)
+    if (dish != null) {
       return (
-        <Card>
-          {/* <CardImg top src={dish.image} alt={dish.name} /> */}
-          <CardBody>
-            {/* <CardTitle>{dish.name}</CardTitle> */}
-            {/* <CardText>{dish.description}</CardText> */}
+        <div className="App">
+          <Card>
+            <CardTitle Style="text-align: left">Comments</CardTitle>
+            <CardBody>
+              {this.props.dishes.map((dish, index) => (
+                <CardText key={index}>
+                  <p> {dish.comments[index].comment}</p>
 
-            <CardText> {dish.comments[0].comment}</CardText>
-            <CardText>
-              {" "}
-              {dish.comments[0].author}, {dish.comments[0].date}
-            </CardText>
-          </CardBody>
-        </Card>
+                  <p>
+                    --
+                    {dish.comments[index].author} ,{dish.comments[index].date}
+                  </p>
+                </CardText>
+              ))}
+            </CardBody>
+          </Card>
+        </div>
       );
-    else return <div></div>;
+    } else {
+      return <div></div>;
+    }
   }
 
   render() {
